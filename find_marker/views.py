@@ -6,7 +6,6 @@
 # from .forms import ImageUploadForm
 # from django.conf import settings
 # from django.shortcuts import render
-# from .findmk import findmk
 # import urllib
 # import json
 
@@ -14,6 +13,7 @@ import json
 from django.views import View
 from django.http import JsonResponse
 from .models import ImageUploadModel
+from .findmk import findmk
 
 
 class postImg(View):
@@ -23,9 +23,9 @@ class postImg(View):
         ImageUploadModel(
             document=data['document'],
         ).save()
+        address = findmk(data['document'])
 
-        # 제대로 응답처리 했다면 200 status와 함께 성공 메세지 전달
-        return JsonResponse({'message': 'SUCCESS'}, status=200)
+        return JsonResponse({'message': 'SUCCESS', 'address' : address}, status=200)
 
     def get(self, request):
         data = ImageUploadModel.objects.values() # ORM 메소드를 통해 DB에서 데이터를 가져옴

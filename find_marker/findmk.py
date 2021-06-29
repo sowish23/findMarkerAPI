@@ -12,6 +12,7 @@ conn = sqlite3.connect("test.db", isolation_level=None, check_same_thread=False)
 c = conn.cursor()
 
 def findmk(path):
+    addr = ''
     img_original = cv2.imread(path, cv2.IMREAD_COLOR)
 
     if (type(img_original) is np.ndarray):
@@ -30,13 +31,15 @@ def findmk(path):
             vtc = len(approx)
             
             c.execute('SELECT * FROM shapeTable WHERE code='+str(vtc))
-            print('param2', c.fetchall())
+            addr += c.fetchall()[0][1]
 
         img_text = img_resize[:, 150:]
         text = pytesseract.image_to_string(img_text,lang='eng')
 
         c.execute("SELECT * FROM ocrTable WHERE code='{}'".format(text.strip()))
-        print('param2', c.fetchall())
+        addr = addr + " " + c.fetchall()[0][1]
+        
+        return addr
 
     else :
         print('error')
