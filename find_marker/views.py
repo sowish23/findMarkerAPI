@@ -21,7 +21,7 @@ class postImg(View):
             address=address
         ).save()
 
-        return JsonResponse({'message': 'SUCCESS', 'address' : address}, status=200)
+        return JsonResponse({'message': 'SUCCESS'}, status=200)
 
     def get(self, request):
         data = ImageUploadModel.objects.values() 
