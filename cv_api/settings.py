@@ -27,7 +27,8 @@ SECRET_KEY = 'django-insecure-8n)_=znc=n3!k8f4u*g^@_v*%z2y&^6=ev=3u^e+bx1d3cb@e*
 DEBUG = True
 
 ALLOWED_HOSTS = [
-    'soso2266.pythonanywhere.com'
+    'soso2266.pythonanywhere.com',
+    '127.0.0.1'
 ]
 
 
@@ -47,7 +48,7 @@ MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
-    'django.middleware.csrf.CsrfViewMiddleware',
+    # 'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',

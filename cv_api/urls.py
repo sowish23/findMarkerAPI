@@ -14,10 +14,9 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path
-import find_marker.views
+from django.urls import path, include
 
 urlpatterns = [
-    path('post/', find_marker.views.postImg, name="postImg"),
+    path('post', include('find_marker.urls')),
     path('admin/', admin.site.urls),
 ]
