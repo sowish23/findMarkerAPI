@@ -7,4 +7,4 @@ class ImageUploadModel(models.Model):
 
 class Address(models.Model):
     document = models.ImageField(upload_to = 'images/%Y/%m/%d')
-    address = models.TextField()
+    address = models.TextField(null = True)
