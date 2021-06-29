@@ -29,7 +29,7 @@ class postImg(View):
 
     def get(self, request):
         data = ImageUploadModel.objects.values() # ORM 메소드를 통해 DB에서 데이터를 가져옴
-        return JsonResponse({'users':list(data)}, status=200)
+        return JsonResponse({'images':list(data)}, status=200)
 
 # def postImg(request):
 #     if request.method =='POST':
