@@ -19,7 +19,7 @@ class postImg(View):
         Address(
             document=data['document'],
             address=address
-        ).save(commit = False)
+        ).save()
 
         return JsonResponse({'message': 'SUCCESS'}, status=200)
 
