@@ -24,14 +24,17 @@ def findmk(path):
 
         contours, _ = cv2.findContours(thr, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_NONE)
 
-        address = ''
+        # addr = ''
 
         for cont in contours:
             approx = cv2.approxPolyDP(cont, cv2.arcLength(cont, True) * 0.02, True)
             vtc = len(approx)
             
             c.execute('SELECT * FROM shapeTable WHERE code='+str(vtc))
-            addr += c.fetchall()[0][1]
+            rw = c.fetchone()
+            # print('p', rw)
+            if rw != None:
+                addr += rw[1]
 
         img_text = img_resize[:, 150:]
         text = pytesseract.image_to_string(img_text,lang='eng')
