@@ -14,6 +14,7 @@ c = conn.cursor()
 def findmk(path):
     addr = ''
     img_original = cv2.imread(path, cv2.IMREAD_COLOR)
+    print(type(img_original))
 
     if (type(img_original) is np.ndarray):
         img_resize = cv2.resize(img_original, dsize=(328, 207), interpolation=cv2.INTER_AREA)
