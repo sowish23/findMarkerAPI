@@ -13,6 +13,7 @@ c = conn.cursor()
 
 def findmk(path):
     addr = ''
+    print(path)
     img_original = cv2.imread(path, cv2.IMREAD_COLOR)
     print(type(img_original))
 
