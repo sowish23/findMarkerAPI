@@ -4,22 +4,24 @@ from django.http import JsonResponse
 from .models import ImageUploadModel
 from .models import Address
 from .findmk import findmk
+from rest_framework.parsers import MultiPartParser, FormParser, JSONParser
 
 
 class postImg(View):
-    def post(self, request):
-        print(request.body)
-        data = json.loads(request.body)
+    parser_classes = (MultiPartParser,)
+    def post(self, request, format=None):
+        print(request.FILES['image'])
+
         ImageUploadModel(
-            document=data['document'],
+            document=request.FILES['image'],
         ).save()
 
-        address = findmk(data['document'])
+        # address = findmk(request.FILES['image'])
 
-        Address(
-            document=data['document'],
-            address=address
-        ).save()
+        # Address(
+        #     document=data['document'],
+        #     address=address
+        # ).save()
 
         return JsonResponse({'message': 'SUCCESS'}, status=200)
 
