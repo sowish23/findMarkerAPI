@@ -1,6 +1,7 @@
 from django.urls import path
-from .views import postImg
+from .views import postImg, getAddress
 
 urlpatterns = [
-    path('', postImg.as_view())
+    path('image/', postImg.as_view()),
+    path('address/', getAddress.as_view())
 ]
