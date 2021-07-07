@@ -6,6 +6,7 @@ import subprocess
 from PIL import Image
 import numpy as np
 from pytesseract import *
+import matplotlib.pyplot as plt 
 
 conn = sqlite3.connect("test.db", isolation_level=None, check_same_thread=False)
 
@@ -14,7 +15,7 @@ c = conn.cursor()
 def findmk(path):
     addr = ''
     print(path)
-    img_original = cv2.imread(path, cv2.IMREAD_COLOR)
+    img_original = plt.imread(path, cv2.IMREAD_COLOR)
     print(type(img_original))
     print(img_original)
 
