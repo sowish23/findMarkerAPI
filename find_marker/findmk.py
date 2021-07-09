@@ -16,38 +16,40 @@ c = conn.cursor()
 def findmk(path):
     addr = ''
     print('findmk', path)
-    img_original = plt.imread(path, cv2.IMREAD_COLOR)
+    c.execute("SELECT * FROM ocrTable WHERE code = 'ABCD'")
+    print(c.fetchall())
+    # img_original = plt.imread(path, cv2.IMREAD_COLOR)
 
-    if (type(img_original) is np.ndarray):
-        time.sleep(1)
-        img_resize = cv2.resize(img_original, dsize=(328, 207), interpolation=cv2.INTER_AREA)
-        img_dia = img_resize[:180, :190]
-        gray = cv2.cvtColor(img_dia, cv2.COLOR_BGR2GRAY)
+    # if (type(img_original) is np.ndarray):
+    #     time.sleep(1)
+    #     img_resize = cv2.resize(img_original, dsize=(328, 207), interpolation=cv2.INTER_AREA)
+    #     img_dia = img_resize[:180, :190]
+    #     gray = cv2.cvtColor(img_dia, cv2.COLOR_BGR2GRAY)
 
-        ret, thr = cv2.threshold(gray, 127, 255, cv2.THRESH_BINARY_INV|cv2.THRESH_OTSU)
+    #     ret, thr = cv2.threshold(gray, 127, 255, cv2.THRESH_BINARY_INV|cv2.THRESH_OTSU)
 
-        contours, _ = cv2.findContours(thr, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_NONE)
+    #     contours, _ = cv2.findContours(thr, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_NONE)
 
-        addr = ""
+    #     addr = ""
 
-        for cont in contours:
-            approx = cv2.approxPolyDP(cont, cv2.arcLength(cont, True) * 0.02, True)
-            vtc = len(approx)
+    #     for cont in contours:
+    #         approx = cv2.approxPolyDP(cont, cv2.arcLength(cont, True) * 0.02, True)
+    #         vtc = len(approx)
             
-            c.execute('SELECT * FROM shapeTable WHERE code='+str(vtc))
-            rw = c.fetchone()
-            if rw != None:
-                addr += rw[1]
+    #         c.execute('SELECT * FROM shapeTable WHERE code='+str(vtc))
+    #         rw = c.fetchone()
+    #         if rw != None:
+    #             addr += rw[1]
 
-        img_text = img_resize[:, 150:]
-        text = pytesseract.image_to_string(img_text,lang='eng')
+    #     img_text = img_resize[:, 150:]
+    #     text = pytesseract.image_to_string(img_text,lang='eng')
 
-        c.execute("SELECT * FROM ocrTable WHERE code='{}'".format(text.strip()))
-        addr = addr + " " + c.fetchall()[0][1]
-        print('addr *^^* ', addr)
+    #     c.execute("SELECT * FROM ocrTable WHERE code='{}'".format(text.strip()))
+    #     addr = addr + " " + c.fetchall()[0][1]
+    #     print('addr *^^* ', addr)
         
-        return addr
+    #     return addr
 
-    else :
-        print('error')
+    # else :
+    #     print('error')
 
