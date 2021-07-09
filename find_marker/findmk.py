@@ -9,7 +9,7 @@ from pytesseract import *
 import matplotlib.pyplot as plt 
 import time
 
-conn = sqlite3.connect("./findMarkerAPI/test.db", isolation_level=None, check_same_thread=False)
+conn = sqlite3.connect("test.db", isolation_level=None, check_same_thread=False)
 
 c = conn.cursor()
 
@@ -43,7 +43,10 @@ def findmk(path):
         text = pytesseract.image_to_string(img_text,lang='eng')
 
         c.execute("SELECT * FROM ocrTable WHERE code='{}'".format(text.strip()))
-        addr = addr + " " + c.fetchall()[0][1]
+        pf = c.fetchone()
+        print(pf)
+        if pf != None:
+            addr = addr + " " + pf[1]
         print('addr *^^* ', addr)
         
         return addr
